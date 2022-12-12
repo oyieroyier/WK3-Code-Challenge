@@ -31,14 +31,28 @@ function buildList(data) {
 		movieList.style.margin = "20px";
 		movieList.style.fontSize = "10px";
 		movieList.style.background = "#000";
-		movieList.style.color = "#6274a5";
+		movieList.style.color = "#fff";
 
 		list.style.textAlign = "center";
 		list.style.padding = "20px";
 		list.style.textAlign = "center";
 		list.style.borderRadius = "2px";
 		list.style.background = "#333";
-		list.style.margin = "10px";
-		list.style.fontFamily = "'Shadows Into Light', cursive";
+		list.style.margin = "20px";
+		list.style.fontFamily = "'Chivo Mono', monospace";
+		list.style.color = "#6274a5";
+
+		createButton;
 	});
 }
+
+function createButton() {
+	let bod = document.getElementById("main-body");
+	let button = document.createElement("button");
+	button.id = "btn";
+	button.textContent = "Buy Tickets";
+
+	bod.appendChild(button);
+}
+
+createButton();
