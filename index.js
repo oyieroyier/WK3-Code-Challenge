@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function renderOnPage(data) {
 	let pic = document.getElementById("picha");
-	let body = document.getElementById("main-body");
+	let body = document.getElementById("picture_display");
 
 	let otherDetails = document.createElement("div");
+	// otherDetails.id = "deets"
 
 	let title = document.createElement("h3");
 	let runtime = document.createElement("h4");
@@ -31,7 +32,7 @@ function renderOnPage(data) {
 
 	// Styling
 
-	otherDetails.style.display = "block";
+	body.style.display = "block";
 
 	title.style.border = "1px solid black";
 	runtime.style.border = "1px solid black";
@@ -57,4 +58,20 @@ function renderOnPage(data) {
 	runtime.style.textAlign = "center";
 	showtime.style.textAlign = "center";
 	availableTickets.style.textAlign = "center";
+
+	title.style.borderRadius = "5px";
+	runtime.style.borderRadius = "5px";
+	showtime.style.borderRadius = "5px";
+	availableTickets.style.borderRadius = "5px";
+
+	title.style.background = "#000";
+	runtime.style.background = "#000";
+	showtime.style.background = "#000";
+	availableTickets.style.background = "#000";
+
+	otherDetails.style.background = "#333";
+	otherDetails.style.color = "#6274a5";
+	otherDetails.style.padding = "20px";
+	otherDetails.style.borderRadius = "10px";
+	otherDetails.style.fontFamily = "'Chivo Mono', monospace";
 }

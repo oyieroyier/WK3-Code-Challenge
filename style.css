@@ -1,9 +1,14 @@
 body {
 	margin: auto;
 	padding: 50px;
+	max-width: 900px;
 	/* background: #000; */
 }
 
+#content {
+	display: flex;
+	justify-content: ;
+}
 #header_details {
 	display: flex;
 	justify-content: center;
