@@ -1,6 +1,6 @@
 function domContentLoaded() {
 	document.addEventListener("DOMContentLoaded", () => {
-		fetch("http://localhost:3000/films")
+		fetch("https://api.npoint.io/b18b73a54ceef13f1103")
 			.then((response) => response.json())
 			.then(buildList);
 	});
