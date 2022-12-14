@@ -67,3 +67,7 @@ body {
 	background: #333;
 	color: aliceblue;
 }
+
+.movies-list:hover {
+	cursor: pointer;
+}

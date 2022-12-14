@@ -12,15 +12,17 @@ function buildList(data) {
 	let body = document.getElementById("movie_list");
 	let list = document.createElement("ul");
 
-	list.textContent = "MOVIES";
+	list.textContent = "MOVIES SHOWING";
 
 	data.map((element) => {
 		let movieList = document.createElement("li");
+		movieList.className = "movies-list";
 
 		movieList.textContent = element.title;
 
 		body.appendChild(list);
 		list.appendChild(movieList);
+
 
 		// Styling
 		movieList.style.border = "1px solid black";
