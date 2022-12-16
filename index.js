@@ -1,5 +1,4 @@
-const url =
-	"https://kimathinjoki.github.io/Wk3-code-challenge-Flatdango/db.json";
+const url = "https://api.npoint.io/e0908ad61156f524d892";
 
 document.addEventListener("DOMContentLoaded", () => {
 	const moviePlaceHolder = () => {
