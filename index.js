@@ -1,77 +1,110 @@
+const url =
+	"https://kimathinjoki.github.io/Wk3-code-challenge-Flatdango/db.json";
+
 document.addEventListener("DOMContentLoaded", () => {
-	fetch("https://api.npoint.io/36192c0b367aa871964a/")
-		.then((response) => response.json())
-		.then(renderOnPage);
+	const moviePlaceHolder = () => {
+		fetch(url)
+			.then((res) => res.json())
+			.then((content) => {
+				const firstMovie = content.films[0];
+
+				const filmImg = document.getElementById("poster");
+				const movieTitle = document.getElementById("filmTitle");
+				const movieDescr = document.getElementById("movieDescription");
+				const runningTime = document.getElementById("runtime");
+				const showingTime = document.getElementById("showtime");
+				const availTicket = document.getElementById("ticketsAvailable");
+				filmImg.src = firstMovie.poster;
+				movieTitle.innerText = firstMovie.title;
+				movieDescr.innerText = firstMovie.description;
+				runningTime.innerText = `Runtime: ${firstMovie.runtime} minutes`;
+				showingTime.innerText = `Showtime: ${firstMovie.showtime}`;
+				availTicket.innerText = `Tickets Available: (${
+					firstMovie.capacity - firstMovie.tickets_sold
+				})`;
+
+				const ticketBuy = document.getElementById("buyTicket");
+				let tickets = Number(firstMovie.capacity - firstMovie.tickets_sold);
+
+				ticketBuy.addEventListener("click", () => {
+					tickets--;
+
+					// const ticketRemaining = tickets-1
+
+					if (tickets <= 0) {
+						const frstMovie = document.getElementById("1");
+						frstMovie.innerHTML = `${firstMovie.title}  <span class="badge bg-danger me-1">SOLD OUT</span>`;
+
+						availTicket.innerHTML = `Ticketd available:  <span class="badge bg-danger">SOLD OUT</span>`;
+					} else {
+						availTicket.innerText = `Tickets available: (${tickets})`;
+					}
+				});
+			});
+	};
+
+	const movieDetails = () => {
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				const filmData = data.films;
+				console.log(filmData);
+				for (let i = 0; i < filmData.length; i++) {
+					let item = filmData[i];
+					console.log(item);
+					const movieList = document.createElement("li");
+					const list = document.getElementById("showingMovie");
+
+					movieList.classList.add(
+						"list-group-item",
+						"border",
+						"border-info",
+						"sinema"
+					);
+
+					movieList.setAttribute("id", `${item.id}`);
+					// movieList.className = "sinema"
+					movieList.innerText = item.title;
+					console.log(item.title);
+
+					list.appendChild(movieList);
+
+					movieList.addEventListener("click", () => {
+						const filmImage = document.getElementById("poster");
+						const filmTitle = document.getElementById("filmTitle");
+						const filmDescr = document.getElementById("movieDescription");
+						const runTime = document.getElementById("runtime");
+						const showTime = document.getElementById("showtime");
+						const availTickets = document.getElementById("ticketsAvailable");
+
+						filmImage.src = item.poster;
+						filmTitle.innerText = item.title;
+						filmDescr.innerText = item.description;
+						runTime.innerHTML = `Runtime:<span>${item.runtime}</span>`;
+						showTime.innerText = `Showtime: ${item.showtime}`;
+						availTickets.innerText = `Tickets available: (${
+							item.capacity - item.tickets_sold
+						})`;
+
+						const ticketsBuy = document.getElementById("buyTicket");
+						let ticket = Number(item.capacity - item.tickets_sold);
+
+						ticketsBuy.addEventListener("click", () => {
+							ticket--;
+							if (ticket <= 0) {
+								movieList.innerHTML = `${item.title} <span class="badge bg-danger">SOLD OUT</span>`;
+
+								availTickets.innerHTML = `Tickets available: <span class="badge bg-danger">SOLD OUT</span>`;
+							} else {
+								availTickets.innerText = `Tickets available: (${ticket})`;
+							}
+							
+						});
+					});
+				}
+			});
+	};
+
+	movieDetails();
+	moviePlaceHolder();
 });
-
-function renderOnPage(data) {
-	let pic = document.getElementById("picha");
-	let body = document.getElementById("picture_display");
-
-	let otherDetails = document.createElement("div");
-	// otherDetails.id = "deets"
-
-	let title = document.createElement("h3");
-	let runtime = document.createElement("h4");
-	let showtime = document.createElement("h4");
-	let availableTickets = document.createElement("h5");
-
-	pic.src = data.poster;
-	title.textContent = data.title;
-	runtime.textContent = `Runtime : ${data.runtime} minutes`;
-	showtime.textContent = `Show Time: ${data.showtime}`;
-	availableTickets.textContent = `Available Tickets: ${
-		data.capacity - data.tickets_sold
-	}`;
-
-	body.appendChild(otherDetails);
-	otherDetails.appendChild(title);
-	otherDetails.appendChild(runtime);
-	otherDetails.appendChild(showtime);
-	otherDetails.appendChild(availableTickets);
-
-	// Styling
-
-	body.style.display = "block";
-
-	title.style.border = "1px solid black";
-	runtime.style.border = "1px solid black";
-	showtime.style.border = "1px solid black";
-	availableTickets.style.border = "1px solid black";
-
-	title.style.padding = "10px";
-	runtime.style.padding = "10px";
-	showtime.style.padding = "10px";
-	availableTickets.style.padding = "10px";
-
-	title.style.margin = "20px";
-	runtime.style.margin = "20px";
-	showtime.style.margin = "20px";
-	availableTickets.style.margin = "20px";
-
-	title.style.maxWidth = "100%";
-	runtime.style.maxWidth = "100%";
-	showtime.style.maxWidth = "100%";
-	availableTickets.style.maxWidth = "100%";
-
-	title.style.textAlign = "center";
-	runtime.style.textAlign = "center";
-	showtime.style.textAlign = "center";
-	availableTickets.style.textAlign = "center";
-
-	title.style.borderRadius = "5px";
-	runtime.style.borderRadius = "5px";
-	showtime.style.borderRadius = "5px";
-	availableTickets.style.borderRadius = "5px";
-
-	title.style.background = "#000";
-	runtime.style.background = "#000";
-	showtime.style.background = "#000";
-	availableTickets.style.background = "#000";
-
-	otherDetails.style.background = "#333";
-	otherDetails.style.color = "#6274a5";
-	otherDetails.style.padding = "20px";
-	otherDetails.style.borderRadius = "10px";
-	otherDetails.style.fontFamily = "'Chivo Mono', monospace";
-}
